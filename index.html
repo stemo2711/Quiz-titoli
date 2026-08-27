@@ -199,14 +199,14 @@ const QUIZ_INTRO = {
 const QUIZ = {
   mc: [
     {
-      q: "\u201cI love you baby, lalalalalala. I need you baby, lalalalalala.\u201d Tutti noi (forse) conosciamo questo ritornello, ma qual \u00e8 il titolo della canzone?",
-      opts: ["Can't Take My Eyes off You","Don't Bring Me Down","My Darling Clementine","Baby, I Love You and I Need You"],
-      correct: 0
-    },
-    {
       q: "Qual \u00e8 il titolo originale della tragedia di William Shakespeare \u201cRomeo e Giulietta\u201d?",
       opts: ["The Tragic Tale of Romeo and Juliet: Two Houses, One Love","The Tragedy of Romeo and Juliet, a Verona Love Story","The Most Excellent and Lamentable Tragedy of Romeo and Juliet","William Shakespeare\u2019s Forbidden Love of Romeo and Juliet"],
       correct: 2
+    },
+    {
+      q: "\u201cI love you baby, lalalalalala. I need you baby, lalalalalala.\u201d Tutti noi (forse) conosciamo questo ritornello, ma qual \u00e8 il titolo della canzone?",
+      opts: ["Can't Take My Eyes off You","Don't Bring Me Down","My Darling Clementine","Baby, I Love You and I Need You"],
+      correct: 0
     },
     {
       q: "Qual \u00e8 il titolo italiano di questo dipinto?",
@@ -215,19 +215,15 @@ const QUIZ = {
       correct: 1
     },
     {
-      q: "Quale tra i seguenti film \u00e8 quello con il titolo pi\u00f9 lungo?",
-      imgOptions: [
-        {label:"", wiki_it:"Al\u00ec (film)", wiki_en:"Ali (2001 film)"},
-        {label:"", wiki_it:"Blow (film)", wiki_en:"Blow (2001 film)"},
-        {label:"", wiki_it:"Up (film 2009)", wiki_en:"Up (2009 film)"},
-        {label:"", wiki_it:"Her (film)", wiki_en:"Her (film)"}
-      ],
-      correct: 1
+      q: "Quale tra questi NON è un titolo di un film di Star Wars",
+      img: {wiki_it:"Guerre stellari", wiki_en:"Star Wars"},
+      opts: ["Una nuova speranza","La minaccia fantasma","Il risveglio della forza","I predatori dell'arca perduta"],
+      correct: 3
     },
     {
       q: "Qual \u00e8 il titolo di questo famoso album dei Pink Floyd?",
-      img: {wiki_it:"The Dark Side of the Moon", wiki_en:"The Dark Side of the Moon"},
-      opts: ["Wish You Were Here","The Great Gig in the Sky","The Dark Side of the Moon","Visions of an Alienated Humanity"],
+      img: {wiki_it:"Wish You Were Here", wiki_en:"Wish You Were Here"},
+      opts: ["Shine On You Crazy Diamond","Have a Cigar","Wish You Were Here","Visions of an Alienated Humanity"],
       correct: 2
     }
   ],
