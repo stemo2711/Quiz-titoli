@@ -746,10 +746,17 @@ async function gradeAndReveal(state, round){
     const grade = {};
     ['team1','team2'].forEach(t=>{
       if(ans[t]){
-        const songOk = fuzzyMatch(ans[t].song, p.songAliases);
-        const artistOk = fuzzyMatch(ans[t].artist, p.artistAliases);
-        grade[t] = { song: songOk?'correct':'wrong', artist: artistOk?'correct':'wrong' };
-        scores[t] = (scores[t]||0) + (songOk?1:-1) + (artistOk?1:-1);
+        const songVal = (ans[t].song||'').trim();
+        const artistVal = (ans[t].artist||'').trim();
+        const songOk = songVal ? fuzzyMatch(songVal, p.songAliases) : null;
+        const artistOk = artistVal ? fuzzyMatch(artistVal, p.artistAliases) : null;
+        grade[t] = {
+          song: !songVal ? 'empty' : (songOk?'correct':'wrong'),
+          artist: !artistVal ? 'empty' : (artistOk?'correct':'wrong')
+        };
+        scores[t] = (scores[t]||0)
+          + (!songVal ? 0 : (songOk?1:-1))
+          + (!artistVal ? 0 : (artistOk?1:-1));
       }
     });
     await setShared(GKEY(state.roundIdx,state.questionIdx), grade);
