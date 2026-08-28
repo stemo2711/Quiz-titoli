@@ -746,26 +746,19 @@ async function gradeAndReveal(state, round){
       const grade = {};
       ['team1','team2'].forEach(t=>{
         if(ans[t]){
-          const nameVal = (ans[t].name||'').trim();
-          const countryVal = (ans[t].country||'').trim();
-          const nameOk = nameVal ? fuzzyMatch(nameVal, p.nameAliases) : null;
-          const countryOk = countryVal ? fuzzyMatch(countryVal, p.countryAliases) : null;
-          grade[t] = {
-            name: !nameVal ? 'empty' : (nameOk?'correct':'wrong'),
-            country: !countryVal ? 'empty' : (countryOk?'correct':'wrong')
-          };
-          scores[t] = (scores[t]||0)
-            + (!nameVal ? 0 : (nameOk?1:-1))
-            + (!countryVal ? 0 : (countryOk?1:-1));
+          const nameOk = fuzzyMatch(ans[t].name, p.nameAliases);
+          const countryOk = fuzzyMatch(ans[t].country, p.countryAliases);
+          grade[t] = { name: nameOk?'correct':'wrong', country: countryOk?'correct':'wrong' };
+          scores[t] = (scores[t]||0) + (nameOk?1:-1) + (countryOk?1:-1);
         }
       });
       await setShared(GKEY(state.roundIdx,state.questionIdx), grade);
       await setScores(scores);
     }
-
-  await setState({...state, phase:"reveal"});
-  lastRenderedKey=""; renderPresenter();
-}
+  
+    await setState({...state, phase:"reveal"});
+    lastRenderedKey=""; renderPresenter();
+  }
 
 async function renderPresenterReveal(state, scores){
   const round = ROUNDS[state.roundIdx];
