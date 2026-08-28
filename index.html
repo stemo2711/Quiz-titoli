@@ -742,23 +742,23 @@ async function gradeAndReveal(state, round){
     await setShared(GKEY(state.roundIdx,state.questionIdx), grade);
     await setScores(scores);
   } else if(round.key === "images"){
-      const p = QUIZ.images[state.questionIdx];
-      const grade = {};
-      ['team1','team2'].forEach(t=>{
-        if(ans[t]){
-          const nameOk = fuzzyMatch(ans[t].name, p.nameAliases);
-          const countryOk = fuzzyMatch(ans[t].country, p.countryAliases);
-          grade[t] = { name: nameOk?'correct':'wrong', country: countryOk?'correct':'wrong' };
-          scores[t] = (scores[t]||0) + (nameOk?1:-1) + (countryOk?1:-1);
-        }
-      });
-      await setShared(GKEY(state.roundIdx,state.questionIdx), grade);
-      await setScores(scores);
-    }
-  
-    await setState({...state, phase:"reveal"});
-    lastRenderedKey=""; renderPresenter();
+    const p = QUIZ.images[state.questionIdx];
+    const grade = {};
+    ['team1','team2'].forEach(t=>{
+      if(ans[t]){
+        const songOk = fuzzyMatch(ans[t].song, p.songAliases);
+        const artistOk = fuzzyMatch(ans[t].artist, p.artistAliases);
+        grade[t] = { song: songOk?'correct':'wrong', artist: artistOk?'correct':'wrong' };
+        scores[t] = (scores[t]||0) + (songOk?1:-1) + (artistOk?1:-1);
+      }
+    });
+    await setShared(GKEY(state.roundIdx,state.questionIdx), grade);
+    await setScores(scores);
   }
+
+  await setState({...state, phase:"reveal"});
+  lastRenderedKey=""; renderPresenter();
+}
 
 async function renderPresenterReveal(state, scores){
   const round = ROUNDS[state.roundIdx];
